@@ -1,0 +1,79 @@
+.App {
+  min-height: 100vh;
+  width: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+#ConfigurationMenu {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 1em;
+  background-color: #2B2E2E;
+}
+
+#ImagePreview {
+  display: grid;
+  padding: 1em;
+  width: 100%;
+  box-sizing: border-box;
+  grid-template-columns: repeat(auto-fill, 5.5em);
+  grid-template-rows: repeat(auto-fill, 1fr);
+}
+
+#ImagePreview > div {
+  position: relative
+}
+
+#ImagePreview > div > img {
+  height: 3em;
+}
+
+#ImagePreview > div > button {
+  height: 2em;
+  width: 2em;
+  padding: 0;
+  position: absolute;
+  right: -.5em;
+  top: -.5em;
+  background-color: #D5403A;
+  border: none;
+  border-radius: 50%;
+  color: #edefe4;
+  z-index: 10;
+}
+
+.menuButton {
+  margin: .5em
+}
+
+#Preview {
+  background-color: #fafafa;
+  padding: 1em;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.card {
+  height: 15em;
+  width: 15em;
+  padding: 4em;
+  margin: 1em;
+  float: left;
+  border-radius: 100%;
+  border: .1em solid #3F5344;
+  background-color: #fafafa;
+  display: grid;
+  grid-gap: 2em;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: repeat(2, auto);
+  align-items: center;
+  justify-content: center;
+
+}
+
+.card > img {
+  object-fit: cover;
+  width: 100%;
+}
