@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/cards4children/static/css/main.7de8172c.chunk.css",
-    "main.js": "/cards4children/static/js/main.dc530e26.chunk.js",
-    "main.js.map": "/cards4children/static/js/main.dc530e26.chunk.js.map",
+    "main.css": "/cards4children/static/css/main.67e49169.chunk.css",
+    "main.js": "/cards4children/static/js/main.3aaa25da.chunk.js",
+    "main.js.map": "/cards4children/static/js/main.3aaa25da.chunk.js.map",
     "runtime-main.js": "/cards4children/static/js/runtime-main.dd3451a6.js",
     "runtime-main.js.map": "/cards4children/static/js/runtime-main.dd3451a6.js.map",
     "static/js/2.a17c3a52.chunk.js": "/cards4children/static/js/2.a17c3a52.chunk.js",
     "static/js/2.a17c3a52.chunk.js.map": "/cards4children/static/js/2.a17c3a52.chunk.js.map",
     "index.html": "/cards4children/index.html",
-    "precache-manifest.286b6d5ae33fd58c42aace6b3410e603.js": "/cards4children/precache-manifest.286b6d5ae33fd58c42aace6b3410e603.js",
+    "precache-manifest.aa28e6ec5abb66d1da8e217a03a13c07.js": "/cards4children/precache-manifest.aa28e6ec5abb66d1da8e217a03a13c07.js",
     "service-worker.js": "/cards4children/service-worker.js",
-    "static/css/main.7de8172c.chunk.css.map": "/cards4children/static/css/main.7de8172c.chunk.css.map",
+    "static/css/main.67e49169.chunk.css.map": "/cards4children/static/css/main.67e49169.chunk.css.map",
     "static/js/2.a17c3a52.chunk.js.LICENSE": "/cards4children/static/js/2.a17c3a52.chunk.js.LICENSE"
   },
   "entrypoints": [
     "static/js/runtime-main.dd3451a6.js",
     "static/js/2.a17c3a52.chunk.js",
-    "static/css/main.7de8172c.chunk.css",
-    "static/js/main.dc530e26.chunk.js"
+    "static/css/main.67e49169.chunk.css",
+    "static/js/main.3aaa25da.chunk.js"
   ]
 }

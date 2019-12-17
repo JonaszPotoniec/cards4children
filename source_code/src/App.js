@@ -8,13 +8,25 @@ class App extends React.Component  {
     this.state = {
       files: [],
       numberOfImages: 1,
-      combinations: []
+      combinations: [],
+      settings: {
+        "gap": 2
+      }
     }
 
+    this.setSettings = this.setSettings.bind(this);
     this.loadFile = this.loadFile.bind(this);
     this.removeFile = this.removeFile.bind(this);
     this.changeNumber = this.changeNumber.bind(this);
     this.calculateCombinations = this.calculateCombinations.bind(this);
+  }
+
+  setSettings(setting,event){
+    let temp = this.state.settings;
+    temp[setting] = event.target.value;
+    this.setState({
+      settings: temp
+    })
   }
 
   loadFile(event){
@@ -61,7 +73,7 @@ class App extends React.Component  {
 
     this.setState({
       files: temp
-    })
+    }, this.calculateCombinations)
   }
 
   changeNumber(x){
@@ -79,10 +91,13 @@ class App extends React.Component  {
           removeFile={this.removeFile}
           changeNumber={this.changeNumber}
           numberOfImages={this.state.numberOfImages}
+          setSettings={this.setSettings}
+          settings={this.state.settings}
         />
         <Preview
           combinations={this.state.combinations}
           numberOfImages={this.state.numberOfImages}
+          settings={this.state.settings}
         />
       </div>
     );
@@ -146,6 +161,10 @@ class Configuration extends React.Component {
             })
           }
         </div>
+        <form id="SlidersForm">
+          Padding: <input type="range"  min={1} max={8} step={0.1} value={this.props.settings.padding} onChange={this.props.setSettings.bind(this, "padding")}/>
+          Gap: <input type="range"  min={0} max={10} step={0.1} value={this.props.settings.gap} onChange={this.props.setSettings.bind(this, "gap")}/>
+        </form>
         <div>
           <button onClick={this.convertToPng} className="menuButton">Pobierz razem</button>
           <button onClick={this.convertToAllPng} className="menuButton">Pobierz oddzielnie</button>
@@ -165,7 +184,9 @@ class Preview extends React.Component {
           this.props.combinations.map((combination, index) => {
             return <div key={index} className="card" style={{
                 gridTemplateColumns: "repeat("+Math.ceil(Math.sqrt(this.props.numberOfImages))+", auto)",
-                gridTemplateRows: "repeat("+Math.ceil(Math.sqrt(this.props.numberOfImages))+", auto)"
+                gridTemplateRows: "repeat("+Math.ceil(Math.sqrt(this.props.numberOfImages))+", auto)",
+                gridGap: this.props.settings.gap + "em",
+                padding: this.props.settings.padding + "em"
               }}>
               {
                 combination.map((links, linkIndex) => {
