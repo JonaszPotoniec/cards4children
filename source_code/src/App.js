@@ -10,7 +10,8 @@ class App extends React.Component  {
       numberOfImages: 1,
       combinations: [],
       settings: {
-        "gap": 2
+        "gap": 2,
+        doodle: false
       }
     }
 
@@ -21,9 +22,12 @@ class App extends React.Component  {
     this.calculateCombinations = this.calculateCombinations.bind(this);
   }
 
-  setSettings(setting,event){
+  setSettings(setting,event){ console.log(event.target.checked);
     let temp = this.state.settings;
-    temp[setting] = event.target.value;
+    if(event.target.value === "false")
+        temp[setting] = event.target.checked;
+    else
+        temp[setting] = event.target.value;
     this.setState({
       settings: temp
     })
@@ -36,10 +40,21 @@ class App extends React.Component  {
   }
 
   calculateCombinations(){
-    this.setState({
-      combinations: this.combinations(this.state.files, this.state.numberOfImages)
-    })
+    if(this.state.settings.doodle == true && this.isPrime(this.state.numberOfImages - 1)){
+        this.setState({
+            combinations: (this.DobbleCards(this.state.numberOfImages)).map((e) => {return e.map((x, i) => {return this.state.files[x % this.state.files.length]})})
+        })
+    } else
+        this.setState({
+        combinations: this.combinations(this.state.files, this.state.numberOfImages)
+        })
   }
+  
+    isPrime(num) {
+        for(var i = 2; i < num; i++)
+            if(num % i === 0) return false;
+        return num > 1;
+    }
 
   combinations(set, k) {
     var i, j, combs, head, tailcombs;
@@ -66,7 +81,35 @@ class App extends React.Component  {
     }
     return combs;
   }
+  
+//function from https://stackoverflow.com/questions/52822827/spot-it-algorithm-js
+  DobbleCards(n) { // n-1 must be prime
+        var cards = [];
 
+        // first card and first category
+        for (var crd = 0; crd < n; crd++) {
+            var symbols = [0];
+            for (var sym = 1; sym < n; sym++) {
+                symbols.push(crd * (n-1) + sym);
+            }
+            cards.push(symbols.slice());
+        }
+
+        // other categories
+        for (var cat = 1; cat < n; cat++) {
+            for (var crd = 0; crd < n-1; crd++) {
+                var symbols = [cat];
+                for (var sym = 1; sym < n; sym++) {
+                    symbols.push(1 + sym * (n-1) + ((cat-1) * (sym-1) + crd) % (n-1));
+                }
+                cards.push(symbols.slice());
+            }
+        }
+    console.log(cards);
+        return cards;
+    }
+//#####################
+    
   removeFile(i){
     let temp = this.state.files;
     temp.splice(i, 1);
@@ -164,6 +207,7 @@ class Configuration extends React.Component {
         <form id="SlidersForm">
           Padding: <input type="range"  min={1} max={8} step={0.1} value={this.props.settings.padding} onChange={this.props.setSettings.bind(this, "padding")}/>
           Gap: <input type="range"  min={0} max={10} step={0.1} value={this.props.settings.gap} onChange={this.props.setSettings.bind(this, "gap")}/>
+          (beta) Tryb doodle: <input type="checkbox" value={this.props.settings.doodle} onChange={this.props.setSettings.bind(this, "doodle")}/>
         </form>
         <div>
           <button onClick={this.convertToPng} className="menuButton">Pobierz razem</button>
